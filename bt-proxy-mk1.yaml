@@ -30,7 +30,7 @@ uart:
 # Enabled Logging
 logger:
   # Serial logging costs CPU and RAM on a dedicated proxy. API logs still work.
-  baud_rate: 0
+  # baud_rate: 0 # baud_rate bust not be 0 for improv_serial
 
 # Enable Home Assistant API
 api:
