@@ -60,9 +60,9 @@ packages:
       - usb-c-power.yaml
       - presence-ld2410.yaml
       - diagnostics.yaml
-    substitutions:
-      led_data_pin: GPIO10
-      ambient_light_glass_attenuation_factor: 2 # Sensor is behind acrylic with 50% transmission
-      usb_c_power_cc1_detect_pin: GPIO0
-      usb_c_power_cc2_detect_pin: GPIO1
-      usb_c_power_enable_pin: GPIO21
+substitutions:
+  led_data_pin: GPIO10
+  ambient_light_glass_attenuation_factor: 2 # Sensor is behind acrylic with 50% transmission
+  usb_c_power_cc1_detect_pin: GPIO0
+  usb_c_power_cc2_detect_pin: GPIO1
+  usb_c_power_enable_pin: GPIO21
