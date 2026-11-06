@@ -14,14 +14,14 @@ esphome:
 
 # Allow ESPHome Adoption
 dashboard_import:
-  package_import_url: https://github.com/ElevatedSensors/bt-proxy-mk1/bt-proxy-mk1.yaml
+  package_import_url: https://github.com/ElevatedSensors/bt-proxy-mk1/bt-proxy-mk1.yaml@main
   import_full_config: true
 
 # Allow provisioning WiFi credentials via serial
 improv_serial:
 
 # Allow provisioning WiFi credentials via Bluetooth
-esp32_improv:
+improv_ble:
   authorizer: none
 
 # Managed updates from ElevatedSensors
