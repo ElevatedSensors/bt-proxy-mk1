@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  pull_request:
+  schedule:
+    - cron: '0 7 * * *'   # run every day at 07:00 UTC
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  ci:
+    name: Building ${{ matrix.file }} / ${{ matrix.esphome-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      max-parallel: 3
+      matrix:
+        file:
+          - bt-proxy-mk1
+        esphome-version:
+          - stable
+          - beta
+          - dev
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v6
+    #   - name: Change remote_package branch to current dev branch
+    #     run: |
+    #       branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}
+    #       echo "Replacing @main with @${branch} in bt-proxy-mk1.yaml"
+    #       sed -i "s/ref: main/ref: ${branch}/g" ./bt-proxy-mk1.yaml
+      - name: ESPHome ${{ matrix.esphome-version }}
+        uses: esphome/build-action@v7
+        id: esphome-build
+        with:
+          yaml-file: ${{ matrix.file }}.yaml
+          version: ${{ matrix.esphome-version }}
+      - name: ESPHome ${{ matrix.esphome-version }} Factory
+        uses: esphome/build-action@v7
+        with:
+          yaml-file: ${{ matrix.file }}.factory.yaml
+          version: ${{ matrix.esphome-version }}

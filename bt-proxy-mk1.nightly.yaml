@@ -1,0 +1,11 @@
+packages:
+  bt-proxy-mk1: !include bt-proxy-mk1.factory.yaml
+
+esphome:
+  project:
+    version: dev # This will be replace by the github workflows with the `dev` version
+
+update:
+  - id: !extend update_http_request
+    source: https://elevatedsensors.github.io/bt-proxy-mk1/bt-proxy-mk1.manifest.json
+    update_interval: 60s

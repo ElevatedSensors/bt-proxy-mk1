@@ -1,0 +1,68 @@
+esphome:
+  name: bt-proxy-mk1
+  friendly_name: BT Proxy Mk1
+  name_add_mac_suffix: true
+  project:
+    name: ElevatedSensors.BTProxyMk1
+    version: DIY
+  platformio_options:
+    board_build.flash_mode: dio
+
+esp32:
+  variant: esp32c3
+  framework:
+    type: esp-idf
+
+i2c:
+  scl: GPIO4
+  sda: GPIO5
+  scan: true
+  id: i2c_0
+
+uart:
+  tx_pin: GPIO6
+  rx_pin: GPIO7
+  baud_rate: 256000
+  parity: NONE
+  stop_bits: 1
+  id: uart_0
+
+# Enabled Logging
+logger:
+  # Serial logging costs CPU and RAM on a dedicated proxy. API logs still work.
+  baud_rate: 0
+
+# Enable Home Assistant API
+api:
+
+# Enable WiFi
+wifi:
+  # Set up a WiFi access point
+  ap: {}
+
+# In combination with the `ap` this allows the user to 
+# provision WiFi credentials to the device via WiFi AP
+captive_portal:
+
+# Enable ESPHome OTA Updates
+ota:
+  - platform: esphome
+
+packages:
+  esphome-common:
+    url: https://github.com/ElevatedSensors/esphome-common
+    ref: main
+    refresh: always
+    files:
+      - bluetooth-proxy.yaml
+      - led-ws2812.yaml
+      - ambient-light-ltr.yaml
+      - usb-c-power.yaml
+      - presence-ld2410.yaml
+      - diagnostics.yaml
+    substitutions:
+      led_data_pin: GPIO10
+      ambient_light_glass_attenuation_factor: 2 # Sensor is behind acrylic with 50% transmission
+      usb_c_power_cc1_detect_pin: GPIO0
+      usb_c_power_cc2_detect_pin: GPIO1
+      usb_c_power_enable_pin: GPIO21
