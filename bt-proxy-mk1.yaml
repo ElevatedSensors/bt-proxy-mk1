@@ -56,9 +56,9 @@ packages:
     files:
       - bluetooth-proxy.yaml
       - led-ws2812.yaml
+      - led-status.yaml
       - ambient-light-ltr.yaml
       - usb-c-power.yaml
-      - presence-ld2410.yaml
       - diagnostics.yaml
 substitutions:
   led_data_pin: GPIO10
