@@ -47,6 +47,9 @@ captive_portal:
 # Enable ESPHome OTA Updates
 ota:
   - platform: esphome
+    on_begin:
+      then:
+        - script.execute: led_ota
 
 packages:
   esphome-common:
